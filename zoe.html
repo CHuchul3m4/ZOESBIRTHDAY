@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Feliz cumple Zoe Yudit! 🎂</title>
+
+<style>
+    :root {
+        --ink: #4a2d6b;
+        --pink: #ff7eb6;
+        --yellow: #ffd23f;
+        --blue: #5bc8f5;
+        --green: #6fdc8c;
+        --orange: #ff9f45;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+        margin: 0;
+        height: 100%;
+        font-family: "Chalkboard SE", "Comic Sans MS", "Trebuchet MS", sans-serif;
+        color: var(--ink);
+        overflow: hidden;
+    }
+
+    body {
+        background:
+            radial-gradient(circle at 15% 12%, #fff 0 38px, transparent 40px),
+            radial-gradient(circle at 24% 10%, #fff 0 30px, transparent 32px),
+            radial-gradient(circle at 85% 20%, #fff 0 34px, transparent 36px),
+            radial-gradient(circle at 93% 18%, #fff 0 26px, transparent 28px),
+            linear-gradient(#bfe9ff, #ffeefa 70%, #ffe1f1);
+    }
+
+    .app {
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        margin: 4px 0 0;
+        text-align: center;
+        font-size: clamp(24px, 7.5vw, 40px);
+        line-height: 1.05;
+        color: #ff4f9a;
+        text-shadow: 3px 3px 0 #fff, 5px 5px 0 var(--yellow);
+    }
+
+    /* ---------- GLOBO DE TEXTO ---------- */
+    .bubble {
+        position: relative;
+        background: #fff;
+        border: 4px solid var(--pink);
+        border-radius: 26px;
+        padding: 12px 16px;
+        min-height: 74px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: clamp(19px, 5.4vw, 26px);
+        font-weight: bold;
+        line-height: 1.25;
+        margin-top: 8px;
+    }
+    .bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -22px;
+        left: 50%;
+        margin-left: -14px;
+        border: 14px solid transparent;
+        border-top-color: var(--pink);
+    }
+
+    /* ---------- PERSONAJE ---------- */
+    .stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; width: 100%; }
+    .pipo {
+        height: 100%;
+        max-height: 330px;
+        width: auto;
+        max-width: 80%;
+        animation: float 3s ease-in-out infinite;
+        cursor: pointer;
+        filter: drop-shadow(0 8px 0 rgba(74, 45, 107, 0.12));
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+        50%      { transform: translateY(-10px) rotate(1.5deg); }
+    }
+    .eye { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
+    @keyframes blink {
+        0%, 94%, 100% { transform: scaleY(1); }
+        97%           { transform: scaleY(0.1); }
+    }
+    #armL { transform-box: fill-box; transform-origin: 80% 20%; }
+    body.wave #armL { animation: wave 0.5s ease-in-out infinite alternate; }
+    @keyframes wave {
+        from { transform: rotate(-10deg); }
+        to   { transform: rotate(40deg); }
+    }
+
+    /* ---------- BOTONES ---------- */
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+    }
+    .big {
+        border: none;
+        border-radius: 24px;
+        padding: 10px 6px 8px;
+        font-family: inherit;
+        font-size: clamp(16px, 4.6vw, 22px);
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+        cursor: pointer;
+        box-shadow: 0 6px 0 rgba(74, 45, 107, 0.28);
+        transition: transform 0.08s, box-shadow 0.08s;
+    }
+    .big:active { transform: translateY(5px); box-shadow: 0 1px 0 rgba(74, 45, 107, 0.28); }
+    .big .e { display: block; font-size: clamp(34px, 10vw, 50px); line-height: 1.1; }
+    .b1 { background: var(--pink); }
+    .b2 { background: var(--blue); }
+    .b3 { background: var(--orange); }
+    .b4 { background: var(--green); }
+
+    /* ---------- PORTADA ---------- */
+    .start {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 20px;
+        text-align: center;
+        background:
+            radial-gradient(circle at 20% 20%, #fff7 0 60px, transparent 62px),
+            linear-gradient(#ffd6ec, #cfeeff);
+    }
+    .start .big-four {
+        font-size: clamp(120px, 40vw, 220px);
+        line-height: 1;
+        font-weight: bold;
+        color: var(--yellow);
+        text-shadow: 6px 6px 0 var(--pink), 10px 10px 0 #fff;
+        animation: pop 1.2s ease-in-out infinite;
+    }
+    @keyframes pop { 0%, 100% { transform: scale(1) rotate(-4deg); } 50% { transform: scale(1.08) rotate(4deg); } }
+    .start h2 { margin: 0; font-size: clamp(22px, 7vw, 34px); color: #ff4f9a; text-shadow: 2px 2px 0 #fff; }
+    .go {
+        border: none;
+        border-radius: 999px;
+        padding: 18px 34px;
+        font-family: inherit;
+        font-size: clamp(24px, 7vw, 34px);
+        font-weight: bold;
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 8px 0 #c23a7c;
+        cursor: pointer;
+        animation: pulse 1.4s ease-in-out infinite;
+    }
+    .go:active { transform: translateY(6px); box-shadow: 0 2px 0 #c23a7c; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+    /* ---------- GLOBOS ---------- */
+    .sky { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+    .balloon {
+        position: absolute;
+        bottom: -130px;
+        width: 70px;
+        height: 88px;
+        border: none;
+        border-radius: 50% 50% 50% 50% / 58% 58% 42% 42%;
+        pointer-events: auto;
+        cursor: pointer;
+        animation: rise linear forwards;
+        box-shadow: inset -8px -8px 0 rgba(0, 0, 0, 0.1), inset 8px 8px 0 rgba(255, 255, 255, 0.3);
+    }
+    .balloon::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 2px;
+        height: 36px;
+        background: #6b5a7e;
+    }
+    @keyframes rise {
+        from { transform: translateY(0) translateX(0); }
+        50%  { transform: translateY(-60vh) translateX(18px); }
+        to   { transform: translateY(-125vh) translateX(-10px); }
+    }
+
+    /* ---------- PASTEL ---------- */
+    .cakeModal {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: rgba(74, 45, 107, 0.55);
+    }
+    .cakeModal.show { display: flex; }
+    .cakeCard {
+        background: #fff0f8;
+        border: 6px solid var(--pink);
+        border-radius: 32px;
+        padding: 20px 26px 10px;
+        text-align: center;
+    }
+    .candles { display: flex; justify-content: center; gap: 26px; height: 64px; align-items: flex-end; margin-bottom: -6px; position: relative; z-index: 1; }
+    .candle { width: 12px; height: 34px; background: repeating-linear-gradient(#fff 0 8px, #ff7eb6 8px 16px); border-radius: 4px; position: relative; }
+    .candle i {
+        position: absolute;
+        top: -30px;
+        left: -9px;
+        font-style: normal;
+        font-size: 30px;
+        transition: opacity 0.3s, transform 0.3s;
+        animation: flicker 0.4s infinite alternate;
+    }
+    .candle.out i { opacity: 0; transform: translateY(-14px) scale(0.5); animation: none; }
+    @keyframes flicker { from { transform: scale(1) rotate(-7deg); } to { transform: scale(1.15) rotate(7deg); } }
+    .cakeEmoji { font-size: clamp(120px, 38vw, 180px); line-height: 1; }
+
+    /* ---------- CONFETI ---------- */
+    .confetti {
+        position: fixed;
+        top: -40px;
+        z-index: 90;
+        pointer-events: none;
+        animation: fall linear forwards;
+    }
+    @keyframes fall { to { transform: translateY(112vh) rotate(540deg); } }
+
+    /* ---------- PAPÁS ---------- */
+    .parents { width: 100%; font-size: 14px; text-align: center; margin-top: 8px; }
+    .parents summary { cursor: pointer; opacity: 0.7; }
+    .parents .panel { background: #fff; border-radius: 14px; padding: 10px; margin-top: 6px; text-align: left; }
+    .parents select, .parents button { font-family: inherit; font-size: 14px; margin: 4px 0; max-width: 100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pipo, .eye, .go, .start .big-four, .candle i { animation: none; }
+        .confetti { display: none; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- PORTADA: el navegador exige un toque para poder reproducir voz -->
+<div class="start" id="start">
+    <div class="big-four">4</div>
+    <h2>¡Zoe Yudit, alguien quiere saludarte!</h2>
+    <button class="go" id="go" type="button">👋 ¡Toca aquí!</button>
+</div>
+
+<div class="app">
+    <h1>¡Feliz cumple,<br>Zoe Yudit! 🎉</h1>
+
+    <div class="bubble" id="bubble" aria-live="polite">...</div>
+
+    <div class="stage">
+        <!-- PIPO: personaje original dibujado en SVG -->
+        <svg class="pipo" id="pipo" viewBox="0 -25 200 260" role="img" aria-label="Pipo, el conejito de la fiesta">
+            <!-- orejas -->
+            <g transform="rotate(-14 70 40)">
+                <ellipse cx="70" cy="25" rx="19" ry="46" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+                <ellipse cx="70" cy="30" rx="9" ry="30" fill="#ffc1de"/>
+            </g>
+            <g transform="rotate(14 130 40)">
+                <ellipse cx="130" cy="25" rx="19" ry="46" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+                <ellipse cx="130" cy="30" rx="9" ry="30" fill="#ffc1de"/>
+            </g>
+            <!-- cuerpo -->
+            <ellipse cx="100" cy="178" rx="52" ry="46" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+            <ellipse cx="100" cy="186" rx="30" ry="28" fill="#ffeaf4"/>
+            <!-- bracitos -->
+            <ellipse id="armR" cx="52" cy="172" rx="13" ry="20" fill="#fff" stroke="#e7a8c8" stroke-width="3" transform="rotate(20 52 172)"/>
+            <ellipse id="armL" cx="148" cy="172" rx="13" ry="20" fill="#fff" stroke="#e7a8c8" stroke-width="3" transform="rotate(-20 148 172)"/>
+            <!-- patitas -->
+            <ellipse cx="76" cy="222" rx="20" ry="11" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+            <ellipse cx="124" cy="222" rx="20" ry="11" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+            <!-- cabeza -->
+            <circle cx="100" cy="106" r="60" fill="#fff" stroke="#e7a8c8" stroke-width="3"/>
+            <!-- moñito -->
+            <polygon points="100,150 80,140 80,160" fill="#ff7eb6"/>
+            <polygon points="100,150 120,140 120,160" fill="#ff7eb6"/>
+            <circle cx="100" cy="150" r="7" fill="#ff4f9a"/>
+            <!-- gorrito de fiesta -->
+            <polygon points="100,-6 68,52 132,52" fill="#ffd23f" stroke="#e0a800" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="100" cy="-8" r="9" fill="#ff7eb6"/>
+            <text x="100" y="42" text-anchor="middle" font-size="30" font-weight="bold" fill="#ff4f9a" font-family="Comic Sans MS, sans-serif">4</text>
+            <!-- ojos -->
+            <g class="eye"><ellipse cx="78" cy="102" rx="8" ry="10" fill="#3a2a4d"/><circle cx="81" cy="98" r="3" fill="#fff"/></g>
+            <g class="eye"><ellipse cx="122" cy="102" rx="8" ry="10" fill="#3a2a4d"/><circle cx="125" cy="98" r="3" fill="#fff"/></g>
+            <!-- cachetes y nariz -->
+            <circle cx="62" cy="120" r="10" fill="#ff9ec9" opacity="0.7"/>
+            <circle cx="138" cy="120" r="10" fill="#ff9ec9" opacity="0.7"/>
+            <ellipse cx="100" cy="116" rx="6" ry="4.5" fill="#ff6fa8"/>
+            <!-- boca -->
+            <path id="mouthClosed" d="M86 124 Q93 134 100 124 Q107 134 114 124" fill="none" stroke="#3a2a4d" stroke-width="3" stroke-linecap="round"/>
+            <g id="mouthOpen" style="display:none">
+                <ellipse cx="100" cy="129" rx="11" ry="10" fill="#c2185b" stroke="#3a2a4d" stroke-width="3"/>
+                <ellipse cx="100" cy="134" rx="6" ry="4" fill="#ff8fb8"/>
+            </g>
+        </svg>
+    </div>
+
+    <div class="buttons">
+        <button class="big b1" id="btnCake"   type="button"><span class="e">🎂</span>Velitas</button>
+        <button class="big b2" id="btnBalls"  type="button"><span class="e">🎈</span>Globos</button>
+        <button class="big b3" id="btnGift"   type="button"><span class="e">🎁</span>Sorpresa</button>
+        <button class="big b4" id="btnAgain"  type="button"><span class="e">🗣️</span>Otra vez</button>
+    </div>
+
+    <details class="parents">
+        <summary>Para papás</summary>
+        <div class="panel">
+            La voz depende del celular o la tablet. Si no se escucha, suban el volumen o prueben otra voz:<br>
+            <select id="voiceSel" aria-label="Voz"></select>
+            <button type="button" id="voiceTest">▶ Probar voz</button>
+        </div>
+    </details>
+</div>
+
+<div class="sky" id="sky"></div>
+
+<div class="cakeModal" id="cakeModal">
+    <div class="cakeCard">
+        <div class="candles" id="candles">
+            <div class="candle"><i>🔥</i></div>
+            <div class="candle"><i>🔥</i></div>
+            <div class="candle"><i>🔥</i></div>
+            <div class="candle"><i>🔥</i></div>
+        </div>
+        <div class="cakeEmoji">🎂</div>
+    </div>
+</div>
+
+
+<script>
+(function () {
+    /* ====== PERSONALIZA AQUÍ ====== */
+    var NOMBRE  = "Zoe Yudit";
+    var PERSONAJE = "Pipo";
+    var FIRMA   = "tu primi";          // quién manda el saludo
+    var MENSAJE_EXTRA = "";            // opcional: una frase más que dirá Pipo en la sorpresa
+    /* ================================ */
+
+    var synth = window.speechSynthesis;
+    var voices = [], voice = null, token = 0, mouthTimer = null, audioCtx = null;
+
+    var bubble = document.getElementById("bubble");
+    var mouthOpen = document.getElementById("mouthOpen");
+    var mouthClosed = document.getElementById("mouthClosed");
+
+    /* ---------- VOZ ---------- */
+    function loadVoices() {
+        if (!synth) return;
+        voices = synth.getVoices().filter(function (v) { return /^es/i.test(v.lang); });
+        var sel = document.getElementById("voiceSel");
+        var prev = sel.value;
+        sel.innerHTML = "";
+        voices.forEach(function (v, i) {
+            var o = document.createElement("option");
+            o.value = i; o.textContent = v.name + " (" + v.lang + ")";
+            sel.appendChild(o);
+        });
+        var pref = ["es-MX", "es-US", "es-419", "es-ES"];
+        var idx = -1;
+        for (var p = 0; p < pref.length && idx < 0; p++) {
+            for (var i = 0; i < voices.length; i++) {
+                if (voices[i].lang.replace("_", "-").toLowerCase() === pref[p].toLowerCase()) { idx = i; break; }
+            }
+        }
+        if (idx < 0 && voices.length) idx = 0;
+        if (prev !== "" && voices[prev]) idx = +prev;
+        voice = idx >= 0 ? voices[idx] : null;
+        if (idx >= 0) sel.value = idx;
+    }
+    if (synth) {
+        loadVoices();
+        if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+    }
+    document.getElementById("voiceSel").addEventListener("change", function (e) {
+        voice = voices[e.target.value] || null;
+    });
+
+    function setMouth(open) {
+        mouthOpen.style.display = open ? "" : "none";
+        mouthClosed.style.display = open ? "none" : "";
+    }
+    function startMouth() {
+        stopMouth();
+        var o = false;
+        mouthTimer = setInterval(function () { o = !o; setMouth(o); }, 140);
+    }
+    function stopMouth() {
+        if (mouthTimer) clearInterval(mouthTimer);
+        mouthTimer = null;
+        setMouth(false);
+    }
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    function say(text) {
+        var my = token;
+        bubble.textContent = text;
+        return new Promise(function (resolve) {
+            var done = false;
+            function finish() {
+                if (done) return;
+                done = true;
+                if (my === token) stopMouth();
+                resolve();
+            }
+            if (!synth) {               // sin voz: se lee el globo de texto
+                startMouth();
+                setTimeout(finish, 1500 + text.length * 55);
+                return;
+            }
+            var u = new SpeechSynthesisUtterance(text);
+            u.lang = voice ? voice.lang : "es-MX";
+            if (voice) u.voice = voice;
+            u.pitch = 1.5;      // voz agudita de personaje
+            u.rate = 0.9;       // un poco lento para que se entienda
+            u.volume = 1;
+            u.onstart = function () { if (my === token) startMouth(); };
+            u.onend = finish;
+            u.onerror = finish;
+            setTimeout(finish, 4000 + text.length * 120);   // seguro por si el navegador no avisa
+            synth.speak(u);
+        });
+    }
+
+    // dice varias frases seguidas; si se toca otro botón, se corta
+    async function speakAll(lines) {
+        var my = ++token;
+        if (synth) synth.cancel();
+        stopMouth();
+        for (var i = 0; i < lines.length; i++) {
+            if (my !== token) return false;
+            await say(lines[i]);
+            if (my !== token) return false;
+            await wait(250);
+        }
+        return true;
+    }
+
+    /* ---------- SONIDOS ---------- */
+    function initAudio() {
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === "suspended") audioCtx.resume();
+        } catch (e) {}
+    }
+    function beep(f1, f2, dur, type, vol, when) {
+        if (!audioCtx) return;
+        var t = audioCtx.currentTime + (when || 0);
+        var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = type || "sine";
+        o.frequency.setValueAtTime(f1, t);
+        o.frequency.exponentialRampToValueAtTime(Math.max(f2, 1), t + dur);
+        g.gain.setValueAtTime(vol || 0.25, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(t); o.stop(t + dur + 0.02);
+    }
+    function popSound() { beep(700, 90, 0.12, "triangle", 0.35); }
+    function tada() {
+        [523, 659, 784, 1047].forEach(function (f, i) { beep(f, f, 0.25, "triangle", 0.22, i * 0.12); });
+    }
+    function blow() { beep(500, 120, 0.35, "sawtooth", 0.08); }
+
+    /* ---------- CONFETI ---------- */
+    var bits = ["🎈", "🎉", "⭐", "🎊", "💖", "🌈", "🎂"];
+    function confetti(n) {
+        for (var i = 0; i < n; i++) {
+            var el = document.createElement("span");
+            el.className = "confetti";
+            el.textContent = bits[Math.floor(Math.random() * bits.length)];
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.fontSize = (22 + Math.random() * 22) + "px";
+            el.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+            document.body.appendChild(el);
+            (function (e) { setTimeout(function () { e.remove(); }, 6000); })(el);
+        }
+    }
+
+    /* ---------- ACCIONES ---------- */
+    function intro() {
+        document.body.classList.add("wave");
+        speakAll([
+            "¡Hola, " + NOMBRE + "!",
+            "Yo soy " + PERSONAJE + ", y vine a tu fiesta de cumpleaños.",
+            "¡Hoy cumples cuatro años! ¡Felicidades!",
+            "Eres una niña muy linda, muy lista y muy divertida.",
+            "Toca los botones de colores para jugar conmigo."
+        ]).then(function (ok) { if (ok !== false) document.body.classList.remove("wave"); });
+        setTimeout(function () { document.body.classList.remove("wave"); }, 6000);
+    }
+
+    function cake() {
+        var modal = document.getElementById("cakeModal");
+        var candles = Array.prototype.slice.call(document.querySelectorAll(".candle"));
+        candles.forEach(function (c) { c.classList.remove("out"); });
+        modal.classList.add("show");
+        speakAll([
+            "¡Mira qué pastel tan rico!",
+            "Cierra los ojitos y pide un deseo.",
+            "Uno, dos, tres... ¡a soplar las velitas!"
+        ]).then(function (ok) {
+            if (ok === false) return;
+            candles.forEach(function (c, i) {
+                setTimeout(function () { c.classList.add("out"); blow(); }, i * 450);
+            });
+            setTimeout(function () {
+                tada(); confetti(45);
+                speakAll(["¡Muy bien! ¡Feliz cumpleaños, " + NOMBRE + "! ¡Que se cumpla tu deseo!"])
+                    .then(function () { setTimeout(function () { modal.classList.remove("show"); }, 600); });
+            }, candles.length * 450 + 300);
+        });
+    }
+    document.getElementById("cakeModal").addEventListener("click", function () {
+        this.classList.remove("show");
+    });
+
+    function balloons() {
+        var sky = document.getElementById("sky");
+        var colors = ["#ff7eb6", "#5bc8f5", "#ffd23f", "#6fdc8c", "#ff9f45", "#b58cff"];
+        var total = 9, remaining = total, popped = 0;
+        speakAll(["¡Globos! Toca los globos para reventarlos."]);
+        function oneLess() {
+            remaining--;
+            if (remaining === 0) {
+                tada();
+                var msg = popped === 0
+                    ? "¡Se escaparon todos los globos! Pídeme otra vez y los atrapas."
+                    : "¡Pum, pum, pum! Reventaste " + popped + (popped === 1 ? " globo" : " globos") + ". ¡Muy bien!";
+                speakAll([msg]);
+            }
+        }
+        for (var i = 0; i < total; i++) {
+            (function (i) {
+                var b = document.createElement("button");
+                b.className = "balloon";
+                b.type = "button";
+                b.setAttribute("aria-label", "Globo");
+                b.style.left = (4 + Math.random() * 80) + "vw";
+                b.style.background = colors[i % colors.length];
+                b.style.animationDuration = (7 + Math.random() * 4) + "s";
+                b.style.animationDelay = (i * 0.45) + "s";
+                b.addEventListener("pointerdown", function () {
+                    if (b.dataset.gone) return;
+                    b.dataset.gone = 1;
+                    popped++;
+                    popSound();
+                    b.remove();
+                    confetti(4);
+                    oneLess();
+                });
+                b.addEventListener("animationend", function () {
+                    if (b.dataset.gone) return;
+                    b.dataset.gone = 1;
+                    b.remove();
+                    oneLess();
+                });
+                sky.appendChild(b);
+            })(i);
+        }
+    }
+
+    function gift() {
+        tada(); confetti(30);
+        var lines = [
+            "¡Una sorpresa para ti!",
+            FIRMA.charAt(0).toUpperCase() + FIRMA.slice(1) + " te manda un abrazo gigante.",
+            "Te quiere muchísimo y te desea un cumpleaños muy, muy feliz."
+        ];
+        if (MENSAJE_EXTRA) lines.push(MENSAJE_EXTRA);
+        lines.push("¡Feliz cumpleaños, " + NOMBRE + "!");
+        document.body.classList.add("wave");
+        speakAll(lines).then(function () { document.body.classList.remove("wave"); });
+    }
+
+    /* ---------- EVENTOS ---------- */
+    document.getElementById("go").addEventListener("click", function () {
+        initAudio();
+        document.getElementById("start").style.display = "none";
+        tada(); confetti(40);
+        intro();
+    });
+    document.getElementById("btnCake").addEventListener("click", function () { initAudio(); cake(); });
+    document.getElementById("btnBalls").addEventListener("click", function () { initAudio(); balloons(); });
+    document.getElementById("btnGift").addEventListener("click", function () { initAudio(); gift(); });
+    document.getElementById("btnAgain").addEventListener("click", function () { initAudio(); intro(); });
+    document.getElementById("pipo").addEventListener("click", function () {
+        initAudio();
+        speakAll(["¡Jijiji! ¡Me haces cosquillas!"]);
+    });
+    document.getElementById("voiceTest").addEventListener("click", function () {
+        speakAll(["Hola, soy " + PERSONAJE + ". ¿Me escuchas bien?"]);
+    });
+
+    bubble.textContent = "¡Hola, " + NOMBRE + "!";
+})();
+</script>
+
+</body>
+</html>
